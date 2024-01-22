@@ -3,6 +3,9 @@ import Hero from "./components/Hero";
 import Generator from "./components/Generator";
 import Workout from "./components/Workout";
 import { generateWorkout } from "./utils/functions";
+import Header from "./components/Header";
+import LoginForm from "./components/LoginForm";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   const [workout, setWorkout] = useState(null);
@@ -22,6 +25,10 @@ function App() {
 
   return (
     <main className="min-h-screen flex flex-col bg-gradient-to-r from-slate-800 to-slate-950 text-white text-sm sm:text-base">
+      <Header />
+      <Routes>
+        <Route path="/login" element={<LoginForm />} />
+      </Routes>
       <Hero />
       <Generator
         poison={poison}
