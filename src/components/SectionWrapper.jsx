@@ -10,7 +10,9 @@ const SectionWrapper = ({ children, header, title }) => {
           <span className="uppercase font-medium text-purple-600">jacked.</span>
         </h2>
       </div>
-      {children}
+      <div className="max-w-[800px] w-full flex flex-col mx-auto gap-10 p-4">
+        {children}
+      </div>
     </section>
   );
 };
