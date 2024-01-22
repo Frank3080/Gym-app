@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "./Button";
 
 const Hero = () => {
   return (
@@ -15,9 +16,12 @@ const Hero = () => {
         all risks that comes with it,{" "}
         <span className="text-purple-600">unable to fit through doors.</span>{" "}
       </p>
-      <button className="px-8 py-4 rounded-md border border-purple-600 border-solid bg-slate-950 purpleShadow duration-150">
-        <p>Start now!</p>
-      </button>
+      <Button
+        func={() => {
+          window.location.href = "#generate";
+        }}
+        text={"Start now!"}
+      ></Button>
     </div>
   );
 };

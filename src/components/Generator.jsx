@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import SectionWrapper from "./SectionWrapper";
 import { SCHEMES, WORKOUTS } from "../utils/workouts";
+import Button from "./Button";
 
-const Header = ({ index, title, description }) => {
+const Header = (props) => {
+  const { index, title, description } = props;
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center gap-2 justify-center">
@@ -16,12 +18,17 @@ const Header = ({ index, title, description }) => {
   );
 };
 
-const Generator = () => {
+const Generator = (props) => {
   const [showModal, setShowModal] = useState(false);
-  const [poison, setPoison] = useState("individual");
-  const [muscles, setMuscles] = useState([]);
-  const [goals, setGoals] = useState("strength_power");
-
+  const {
+    muscles,
+    setMuscles,
+    poison,
+    setPoison,
+    goal,
+    setGoal,
+    updateWorkout,
+  } = props;
   const handleModal = () => {
     setShowModal(!showModal);
   };
@@ -51,6 +58,7 @@ const Generator = () => {
 
   return (
     <SectionWrapper
+      id={"generate"}
       header={"Generate your workout"}
       title={`It's time to get `}
     >
@@ -126,10 +134,10 @@ const Generator = () => {
         {Object.keys(SCHEMES).map((scheme, schemeIndex) => {
           return (
             <button
-              onClick={() => setGoals(scheme)}
+              onClick={() => setGoal(scheme)}
               className={
                 "bg-slate-950 border  duration-200 px-4 hover:border-purple-600 py-3 rounded-xl " +
-                (scheme === goals ? " border-purple-900" : " border-purple-600")
+                (scheme === goal ? " border-purple-900" : " border-purple-600")
               }
               key={schemeIndex}
             >
@@ -138,6 +146,7 @@ const Generator = () => {
           );
         })}
       </div>
+      <Button func={updateWorkout} text={"Formulate"}></Button>
     </SectionWrapper>
   );
 };
