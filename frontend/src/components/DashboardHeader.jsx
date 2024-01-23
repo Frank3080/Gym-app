@@ -21,9 +21,12 @@ const DashboardHeader = () => {
       </Link>
       <div className="flex flex-col items-center justify-center">
         <p className="mb-2">Welcome Back!</p>
-        <p className="flex items-center gap-2 specialBtn px-3 py-2 rounded-lg text-purple-400 cursor-pointer">
+        <Link
+          to="/todo"
+          className="flex items-center gap-2 specialBtn px-3 py-2 rounded-lg text-purple-400 cursor-pointer"
+        >
           Whats to do today?
-        </p>
+        </Link>
       </div>
       <div className="gap-4 flex items-center">
         <button
