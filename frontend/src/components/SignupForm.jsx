@@ -1,32 +1,28 @@
 import React, { useState } from "react";
-import loginService from "../services/login";
+import signupService from "../services/signup";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 
-const Login = (props) => {
+const Signup = (props) => {
   const { username, setUsername, password, setPassword } = props;
   const navigate = useNavigate();
 
-  const handleLogin = async (event) => {
+  const handleSignup = async (event) => {
     event.preventDefault();
 
     try {
-      const user = await loginService.login({
+      const newUser = await signupService.signup({
         username,
         password,
       });
 
-      // Handle successful login (e.g., redirect, show success message)
-      console.log("User logged in:", user);
+      // Handle successful signup (e.g., redirect, show success message)
+      console.log("User signed up:", newUser);
       navigate("/dashboard");
     } catch (error) {
-      // Handle login error (e.g., show error message)
-      console.error("Login failed:", error.message);
+      // Handle signup error (e.g., show error message)
+      console.error("Signup failed:", error.message);
     }
-  };
-
-  const handleSignupClick = () => {
-    navigate("/signup");
   };
 
   return (
@@ -34,16 +30,16 @@ const Login = (props) => {
       <Header />
       <div className="bg-slate-900 min-h-screen flex items-center justify-center">
         <div className="relative">
-          <div className="absolute top-0 left-0 bg-gradient-to-r from-blue-500 to-blue-600 w-32 h-32 rounded-full -translate-x-[40px]"></div>
-          <div className="absolute bottom-0 right-0 bg-gradient-to-r from-purple-400 to-purple-600 w-24 h-24 rounded-full"></div>
+          <div className="absolute top-0 left-0 bg-gradient-to-r from-purple-400 to-purple-600 w-32 h-32 rounded-full -translate-x-[40px]"></div>
+          <div className="absolute bottom-0 right-0 bg-gradient-to-r from-blue-500 to-blue-600 w-24 h-24 rounded-full"></div>
         </div>
 
         <form
-          onSubmit={handleLogin}
+          onSubmit={handleSignup}
           className="bg-opacity-25 bg-gray-800 p-8 rounded-lg backdrop-blur-md border-2 border-white"
         >
           <h3 className="text-white text-3xl font-semibold mb-8 text-center">
-            Login Here
+            Sign up Here
           </h3>
 
           <label
@@ -74,13 +70,7 @@ const Login = (props) => {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button className="mt-6 w-[90px] bg-white text-gray-800 py-3 rounded-md text-lg font-semibold cursor-pointer">
-            Log In
-          </button>
-          <button
-            onClick={handleSignupClick}
-            className="mt-6 w-[90px] bg-white text-gray-800 py-3 rounded-xl text-lg font-semibold cursor-pointer ml-5"
-          >
+          <button className="mt-6 w-full bg-white text-gray-800 py-3 rounded-md text-lg font-semibold cursor-pointer">
             Sign up
           </button>
         </form>
@@ -89,4 +79,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default Signup;
