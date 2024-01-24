@@ -9,6 +9,7 @@ const { tokenExtractor } = require("./utils/middleware");
 const usersRouter = require("./controllers/users");
 const signupRouter = require("./controllers/signup");
 const calendarRouter = require("./controllers/calendar");
+const todosRouter = require("./controllers/todo");
 
 const mongoUrl = config.MONGODB_URI;
 mongoose
@@ -29,5 +30,6 @@ app.use("/api/users", usersRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/signup", signupRouter);
 app.use("/api/calendar", calendarRouter);
+app.use("/api/todos", todosRouter);
 
 module.exports = app;

@@ -5,9 +5,10 @@ import Workout from "./components/Workout";
 import { generateWorkout } from "./utils/functions";
 import Header from "./components/Header";
 import LoginForm from "./components/LoginForm";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import Signup from "./components/SignupForm";
+import TodoList from "./components/TodoList";
 
 function App() {
   const [workout, setWorkout] = useState(null);
@@ -16,6 +17,7 @@ function App() {
   const [goal, setGoal] = useState("strength_power");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const updateWorkout = () => {
     if (muscles.length < 1) {
@@ -56,6 +58,7 @@ function App() {
               setUsername={setUsername}
               password={password}
               setPassword={setPassword}
+              onLogin={() => setLoggedIn(true)}
             />
           }
         />
@@ -70,7 +73,14 @@ function App() {
             />
           }
         />
-        <Route path="/dashboard" element={<Dashboard />} />
+        {loggedIn ? (
+          // Render Dashboard only if loggedIn is true
+          <Route path="/dashboard" element={<Dashboard />} />
+        ) : (
+          // Redirect to login if not logged in
+          <Route path="/dashboard" element={<Navigate to="/login" />} />
+        )}
+        <Route path="/todo" element={<TodoList />} />
       </Routes>
     </main>
   );

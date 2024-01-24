@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 
 const Login = (props) => {
-  const { username, setUsername, password, setPassword } = props;
+  const { username, setUsername, password, setPassword, onLogin } = props;
   const navigate = useNavigate();
 
   const handleLogin = async (event) => {
@@ -18,6 +18,7 @@ const Login = (props) => {
 
       // Handle successful login (e.g., redirect, show success message)
       console.log("User logged in:", user);
+      onLogin();
       navigate("/dashboard");
     } catch (error) {
       // Handle login error (e.g., show error message)

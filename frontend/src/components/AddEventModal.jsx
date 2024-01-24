@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import Datetime from "react-datetime";
+import calendarService from "../services/calendar";
 
 Modal.setAppElement("#root");
 
@@ -9,13 +10,15 @@ export default function ({ isOpen, onClose, onEventAdded }) {
   const [start, setStart] = useState(new Date());
   const [end, setEnd] = useState(new Date());
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    onEventAdded({
+    const newEvent = {
       title,
       start,
       end,
-    });
+    };
+    onEventAdded(newEvent);
+    await calendarService.add(newEvent);
     onClose();
   };
 

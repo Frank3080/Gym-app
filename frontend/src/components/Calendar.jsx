@@ -8,15 +8,32 @@ import calendarService from "../services/calendar";
 
 const Calendar = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [events, setEvents] = useState([]);
   const calendarRef = useRef(null);
 
-  const onEventAdded = (e) => {
-    let calendarApi = calendarRef.current.getApi();
-    calendarApi.addEvent(e);
+  const onEventAdded = async (event) => {
+    const api = calendarRef.current.getApi();
+    api.addEvent(event);
+    setEvents([...events, event]);
+
+    try {
+      await calendarService.add(event);
+      console.log("Event added to the backend:", event);
+    } catch (error) {
+      console.error("Error adding event to the backend:", error);
+    }
   };
 
-  const handleEventAdd = (data) => {
-    calendarService.add(data.event);
+  const handleSelect = (info) => {
+    const { start, end } = info;
+    const eventNamePrompt = prompt("Enter event name");
+    if (eventNamePrompt) {
+      onEventAdded({
+        title: eventNamePrompt,
+        start,
+        end,
+      });
+    }
   };
 
   return (
@@ -28,12 +45,15 @@ const Calendar = () => {
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView={"dayGridMonth"}
           headerToolbar={{
-            start: "today prev,next", // will normally be on the left. if RTL, will be on the right
+            start: "today prev,next",
             center: "title",
-            end: "dayGridMonth,timeGridWeek,timeGridDay", // will normally be on the right. if RTL, will be on the left
+            end: "dayGridMonth,timeGridWeek,timeGridDay",
           }}
           height={"80vh"}
-          eventAdd={(event) => handleEventAdd(event)}
+          editable
+          selectable
+          events={events}
+          select={handleSelect}
         />
       </div>
       <AddEventModal

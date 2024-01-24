@@ -18,9 +18,8 @@ const Signup = (props) => {
 
       // Handle successful signup (e.g., redirect, show success message)
       console.log("User signed up:", newUser);
-      navigate("/dashboard");
+      navigate("/login");
     } catch (error) {
-      // Handle signup error (e.g., show error message)
       console.error("Signup failed:", error.message);
     }
   };
