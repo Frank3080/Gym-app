@@ -60,10 +60,7 @@ const TodoList = () => {
           <div key={item.id}>
             <li>
               {item.value}
-              <button
-                className="delete-button"
-                onClick={() => deleteItem(item)}
-              >
+              <button className="ml-4" onClick={() => deleteItem(item)}>
                 ❌
               </button>
             </li>
