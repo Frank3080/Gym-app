@@ -9,6 +9,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import Signup from "./components/SignupForm";
 import TodoList from "./components/TodoList";
+import Footer from "./components/Footer";
 
 function App() {
   const [workout, setWorkout] = useState(null);
@@ -82,6 +83,7 @@ function App() {
         )}
         <Route path="/todo" element={<TodoList />} />
       </Routes>
+      <Footer />
     </main>
   );
 }
